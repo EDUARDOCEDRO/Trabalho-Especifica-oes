@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Especificação de Software: Sistema de Agenda de Atividades Acadêmicas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h2 {
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        h3 {
+            margin-top: 20px;
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: Consolas, monospace;
+            color: #d63384;
+        }
+        .section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .prototype {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="section">
+        <h1>Especificação de Software: Sistema de Agenda de Atividades Acadêmicas</h1>
+    </div>
+
+    <div class="section">
+        <h2>1. Requisitos Funcionais (RF)</h2>
+        <ul>
+            <li><strong>RF01:</strong> Cadastro de Usuários</li>
+            <li><strong>RF02:</strong> Autenticação de Usuários</li>
+            <li><strong>RF03:</strong> Cadastro de Disciplinas</li>
+            <li><strong>RF04:</strong> Cadastro de Atividades</li>
+            <li><strong>RF05:</strong> Notificações</li>
+            <li><strong>RF06:</strong> Visualização de Calendário</li>
+            <li><strong>RF07:</strong> Integração com Ferramentas Externas</li>
+            <li><strong>RF08:</strong> Relatórios de Desempenho</li>
+            <li><strong>RF09:</strong> Compartilhamento de Atividades</li>
+            <li><strong>RF10:</strong> Backup e Restauração</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>2. Requisitos Não Funcionais (RNF)</h2>
+        <ul>
+            <li><strong>RNF01:</strong> Segurança</li>
+            <li><strong>RNF02:</strong> Disponibilidade</li>
+            <li><strong>RNF03:</strong> Desempenho</li>
+            <li><strong>RNF04:</strong> Usabilidade</li>
+            <li><strong>RNF05:</strong> Escalabilidade</li>
+            <li><strong>RNF06:</strong> Compatibilidade</li>
+            <li><strong>RNF07:</strong> Acessibilidade</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>3. Protótipos Não Funcionais das Telas</h2>
+        <div class="prototype">
+            <h3>Tela de Login</h3>
+            <p>Campos: E-mail, Senha, Botão "Entrar", Link "Esqueci minha senha".</p>
+        </div>
+        <div class="prototype">
+            <h3>Tela de Cadastro</h3>
+            <p>Campos: Nome, E-mail, Senha, Confirmar Senha, Curso, Semestre, Botão "Cadastrar".</p>
+        </div>
+        <div class="prototype">
+            <h3>Tela de Calendário</h3>
+            <p>Visualização: Dia, Semana, Mês. Botões: Adicionar Atividade, Filtrar por Disciplina, Sincronizar com Google Calendar/Outlook.</p>
+        </div>
+        <div class="prototype">
+            <h3>Tela de Cadastro de Atividade</h3>
+            <p>Campos: Nome da Atividade, Descrição, Disciplina, Data e Hora, Prioridade (Alta, Média, Baixa), Botão "Salvar".</p>
+        </div>
+        <div class="prototype">
+            <h3>Tela de Relatórios</h3>
+            <p>Gráficos: Porcentagem de atividades concluídas, Médias de notas por disciplina. Botões: Exportar para PDF, Compartilhar.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>4. Modelo Entidade-Relacionamento (MER)</h2>
+        <p><strong>Entidades:</strong></p>
+        <ul>
+            <li><strong>Usuario:</strong> id_usuario (PK), nome, email, senha, curso, semestre.</li>
+            <li><strong>Disciplina:</strong> id_disciplina (PK), nome, codigo, id_usuario (FK).</li>
+            <li><strong>Atividade:</strong> id_atividade (PK), nome, descricao, data_hora, prioridade, id_disciplina (FK), id_usuario (FK).</li>
+            <li><strong>Notificacao:</strong> id_notificacao (PK), mensagem, data_hora, id_usuario (FK).</li>
+            <li><strong>Relatorio:</strong> id_relatorio (PK), data_geracao, conteudo, id_usuario (FK).</li>
+        </ul>
+        <p><strong>Relacionamentos:</strong></p>
+        <ul>
+            <li>Um <strong>Usuario</strong> pode ter várias <strong>Disciplinas</strong>.</li>
+            <li>Uma <strong>Disciplina</strong> pode ter várias <strong>Atividades</strong>.</li>
+            <li>Um <strong>Usuario</strong> pode receber várias <strong>Notificacoes</strong>.</li>
+            <li>Um <strong>Usuario</strong> pode gerar vários <strong>Relatorios</strong>.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>5. Modelo Lógico de Banco de Dados</h2>
+        <pre><code>
+CREATE TABLE Usuario (
+    id_usuario INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    senha VARCHAR(255) NOT NULL,
+    curso VARCHAR(50) NOT NULL,
+    semestre INT NOT NULL
+);
+
+CREATE TABLE Disciplina (
+    id_disciplina INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    codigo VARCHAR(20) NOT NULL,
+    id_usuario INT,
+    FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
+);
+
+CREATE TABLE Atividade (
+    id_atividade INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    descricao TEXT,
+    data_hora DATETIME NOT NULL,
+    prioridade ENUM('Alta', 'Média', 'Baixa') NOT NULL,
+    id_disciplina INT,
+    id_usuario INT,
+    FOREIGN KEY (id_disciplina) REFERENCES Disciplina(id_disciplina),
+    FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
+);
+
+CREATE TABLE Notificacao (
+    id_notificacao INT PRIMARY KEY AUTO_INCREMENT,
+    mensagem TEXT NOT NULL,
+    data_hora DATETIME NOT NULL,
+    id_usuario INT,
+    FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
+);
+
+CREATE TABLE Relatorio (
+    id_relatorio INT PRIMARY KEY AUTO_INCREMENT,
+    data_geracao DATETIME NOT NULL,
+    conteudo TEXT NOT NULL,
+    id_usuario INT,
+    FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
+);
+        </code></pre>
+    </div>
+
+    <div class="section">
+        <h2>6. Diferenciais Propostos</h2>
+        <ul>
+            <li><strong>Integração com Ferramentas de Produtividade:</strong> Além da integração com Google Calendar e Outlook, o sistema pode oferecer integração com ferramentas de gestão de projetos como Trello e Asana.</li>
+            <li><strong>Gamificação:</strong> Implementar um sistema de gamificação onde os alunos ganham pontos por concluir atividades, podendo trocar por recompensas virtuais ou desbloquear funcionalidades extras.</li>
+            <li><strong>Análise Preditiva:</strong> Utilizar algoritmos de machine learning para prever o desempenho do aluno com base em suas atividades concluídas e sugerir melhorias.</li>
+            <li><strong>Comunidade e Colaboração:</strong> Criar um espaço onde os alunos possam compartilhar dicas, materiais de estudo e formar grupos de estudo diretamente na plataforma.</li>
+        </ul>
+    </div>
+
+</body>
+</html>
